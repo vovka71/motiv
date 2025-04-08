@@ -29,7 +29,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt install wget  -y -q
-          sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
+          sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev 
           sudo wget https://storage.googleapis.com/chrome-for-testing-public/${{ vars.CHROME_VER }}/linux64/chrome-linux64.zip
           sudo apt-get -y install ./chrome-linux64.zip
           google-chrome --version
