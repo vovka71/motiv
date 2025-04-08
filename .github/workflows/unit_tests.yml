@@ -28,7 +28,7 @@ jobs:
       - name: run single test
         run: |
             mvn -Dtest=UnitTests  test
-
+            ls -a
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
         if: success() || failure()
