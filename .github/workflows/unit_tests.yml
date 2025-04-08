@@ -1,0 +1,49 @@
+
+name: UnitTests
+
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  run_tests:
+    name: UnitTests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout_code
+        uses: actions/checkout@v4
+        with:
+          ref: master
+      - name: Setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: corretto
+          java-version: 11
+          cache: 'maven'
+
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v5
+
+      - name: set dependencies for chrome
+        run: |
+          sudo apt-get update
+          sudo apt install wget  -y -q
+          sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
+          sudo wget https://storage.googleapis.com/chrome-for-testing-public/${{ vars.CHROME_VER }}/linux64/chrome-linux64.zip
+          sudo apt-get -y install ./chrome-linux64.zip
+          google-chrome --version
+
+      - name: run single test
+        run: |
+            mvn -Dtest=UnitTests  test
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: archiving artefacts
+          path: |
+            ./log/
+            ./img/
+            ./target/surefire-reports
