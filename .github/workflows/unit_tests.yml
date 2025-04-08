@@ -29,16 +29,7 @@ jobs:
         run: |
             mvn -Dtest=UnitTests  test
 
-      - name: Install xmllint
-        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
-
-      - name: Parse TestNG XML and Show Summary
-        run: |
-          echo " TestNG Summary:"
-          echo "🧪 TestNG Summary:"
-          passed=$(xmllint --xpath "string(/testng-results/@passed)" test-output/testng-results.xml)
-          failed=$(xmllint --xpath "string(/testng-results/@failed)" test-output/testng-results.xml)
-          skipped=$(xmllint --xpath "string(/testng-results/@skipped)" test-output/testng-results.xml)
-          echo "Passed: $passed"
-          echo "Failed: $failed"
-          echo "Skipped: $skipped"
+      - name: Publish TestNG Summary
+        uses: test-summary/action@v2
+        with:
+            paths: "test-output/testng-results.xml"
