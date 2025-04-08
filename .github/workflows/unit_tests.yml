@@ -39,19 +39,10 @@ jobs:
             ./img/
             ./target/surefire-reports
 
-      - name: Publish TestNG Summary
-        uses: test-summary/action@v2
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: success() || failure()    # run this step even if previous step failed
         with:
-          paths: "target/surefire-reports/*.xml"
-
-      - name: List All Tests (Passed, Failed, Skipped)
-        run: |
-              echo "Listing All Tests (Passed, Failed, Skipped):"
-              for file in target/surefire-reports/*.xml; do
-                # Extract test names along with their status (pass, fail, skip)
-                xmllint --xpath "//test-method/@name" "$file" 2>/dev/null | \
-                sed -E 's/name="([^"]*)"/\1\n/g' | grep -v '^$' | while read -r test; do
-                  status=$(xmllint --xpath "string(//test-method[@name='$test']/@status)" "$file")
-                  echo "Test: $test | Status: $status"
-                done
-              done
+          name: JEST Tests            # Name of the check run which will be created
+          path: reports/jest-*.xml    # Path to test results
+          reporter: jest-junit        # Format of test results      - name: Test Report
