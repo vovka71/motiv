@@ -8,11 +8,11 @@ public class UnitTests {
 
 
     @Test
-    public void chromeDriverTest(){
+    public void chromeDriverTest() throws Exception {
 
         BrowserDriver.loadPage("https://google.com");
         BrowserDriver.findElement(new By.ByName("q"));
     }
 
-    
+
 }
