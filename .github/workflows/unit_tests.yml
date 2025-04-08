@@ -31,11 +31,11 @@ jobs:
 
       - name: Parse TestNG XML and Show Summary
         run: |
-            echo " TestNG Summary:"
+          echo " TestNG Summary:"
           echo "🧪 TestNG Summary:"
           passed=$(xmllint --xpath "string(/testng-results/@passed)" test-output/testng-results.xml)
           failed=$(xmllint --xpath "string(/testng-results/@failed)" test-output/testng-results.xml)
           skipped=$(xmllint --xpath "string(/testng-results/@skipped)" test-output/testng-results.xml)
-          echo "✅ Passed: $passed"
-          echo "❌ Failed: $failed"
-          echo "⏭️ Skipped: $skipped"
+          echo "Passed: $passed"
+          echo "Failed: $failed"
+          echo "Skipped: $skipped"
