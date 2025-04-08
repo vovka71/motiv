@@ -28,6 +28,9 @@ jobs:
       - name: run single test
         run: |
             mvn -Dtest=UnitTests  test
+          -
+      - name: Install xmllint
+        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
 
       - name: Parse TestNG XML and Show Summary
         run: |
