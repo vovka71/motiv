@@ -42,4 +42,4 @@ jobs:
       - name: Publish TestNG Summary
         uses: test-summary/action@v2
         with:
-            paths: "surefire-reports/testng-results.xml"
+            paths: "target/surefire-reports/testng-results.xml"
