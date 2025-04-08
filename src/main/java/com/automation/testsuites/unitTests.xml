@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Create test groups" verbose="1">
+    <test name="Security Test">
+        <classes>
+            <class name="com.automation.UnitTests" />
+        </classes>
+    </test>
+</suite>
