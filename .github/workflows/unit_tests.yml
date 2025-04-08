@@ -38,10 +38,11 @@ jobs:
             ./log/
             ./img/
             ./target/surefire-reports
-
       - name: Test Report
         uses: dorny/test-reporter@v2
         if: success() || failure()    # run this step even if previous step failed
         with:
-          path: surefire-reports/junitreports/Test-*.xml    # Path to test results
-          reporter: java-junit        # Format of test results      - name: Test Report
+          name: Java Tests            # Name of the check run which will be created
+          path: reports/junitreports/*.xml    # Path to test results
+          reporter: java-junit        # Format of test results
+
