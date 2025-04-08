@@ -27,12 +27,11 @@ jobs:
 
       - name: set dependencies for chrome
         run: |
+          sudo apt-get install -y wget gnupg2
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt-get update
-          sudo apt install wget  -y -q
-          sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev 
-          sudo wget https://storage.googleapis.com/chrome-for-testing-public/${{ vars.CHROME_VER }}/linux64/chrome-linux64.zip
-          sudo apt-get -y install ./chrome-linux64.zip
-          google-chrome --version
+          sudo apt-get install -y google-chrome-stable
 
       - name: run single test
         run: |
